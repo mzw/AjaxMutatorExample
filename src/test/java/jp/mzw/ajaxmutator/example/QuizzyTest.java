@@ -30,20 +30,26 @@ public class QuizzyTest extends WebAppTestBase {
 	
 	@Test
 	public void showQuizDescription() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("quizzy_quiz_opt0")));
-		driver.findElement(By.id("quizzy_quiz_opt0")).click();;
+		By quizButton = By.id("quizzy_quiz_opt0");
+		By quizDesc = By.id("quizzy_quiz_desc0");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(quizButton));
+		driver.findElement(quizButton).click();
 		Assert.assertEquals("Several quizzes are available; min/max score range is 0-100.",
-				driver.findElement(By.id("quizzy_quiz_desc0")).getText().trim());
+				driver.findElement(quizDesc).getText().trim());
 	}
 
 	@Test
 	public void startQuiz() {
 		showQuizDescription();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("quizzy_start_b")));
-		driver.findElement(By.id("quizzy_start_b")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("quizzy_q_body")));
+		
+		By startButton = By.id("quizzy_start_b");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(startButton));
+		driver.findElement(startButton).click();
+		
+		By quizBody = By.className("quizzy_q_body");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(quizBody));
 		Assert.assertEquals("What does AjaxMutator work for?",
-				driver.findElement(By.className("quizzy_q_body")).getText().trim());
+				driver.findElement(quizBody).getText().trim());
 	}
 
 	//--------------------------------------------------
